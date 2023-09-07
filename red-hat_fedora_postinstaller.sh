@@ -111,7 +111,7 @@ mkdir ~/.config/autostart
 cp /usr/share/applications/google-chrome-beta.desktop ~/.config/autostart
 echo -e "X-GNOME-Autostart-enabled=true" | tee -a ~/.config/autostart/google-chrome-beta.desktop
 
-#Install GPG Keys
+#Install GPG Keys - STILL USING Yubikey we need to import
 gpg2 --import /run/media/ignaciosantolin/KEYS/private.pgp
 gpg2 --keyserver keys.openpgp.org --recv-keys ADD3C408CD66D157
 
