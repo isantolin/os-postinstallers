@@ -126,7 +126,7 @@ sudo /usr/sbin/kmodgenca
 sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 
 # Setup Printer
-sudo lpadmin -p "L3250" -E -v dnssd://EPSON%20L3250%20Series._ipp._tcp.local/ -m everywhere
+sudo lpadmin -p "L3250" -E -v dnssd://EPSON%20L3250%20Series._ipp._tcp.local/ -m everywhere -o Media=A4 -o PageSize=A4
 sudo lpadmin -d "L3250"
 
 # Setup VM
