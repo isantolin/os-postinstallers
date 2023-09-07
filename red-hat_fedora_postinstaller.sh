@@ -23,6 +23,7 @@ gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.desktop.datetime automatic-timezone true
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'br')]"
 gsettings set org.gnome.desktop.interface show-battery-percentage true
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
   
 # Other repository and external packages install
 sudo dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$VERSION_ID".noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$VERSION_ID".noarch.rpm https://dl.google.com/linux/direct/google-chrome-beta_current_"$ARCH".rpm
