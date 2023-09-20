@@ -48,7 +48,7 @@ sudo dnf -y install webmin httpd gcc-c++ make nodejs cups-pdf cups-lpd cabextrac
 
 sudo dnf -y install https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
-sudo dnf -y install python-devel cairo-devel gobject-introspection-devel cairo-gobject-devel libcurl-devel krb5-devel kernel-devel-"$KERNEL" libvirt-devel
+sudo dnf -y install python-devel cairo-devel gobject-introspection-devel cairo-gobject-devel libcurl-devel krb5-devel kernel-devel-"$KERNEL" libvirt-devel pcsc-lite-devel libdb-devel
 sudo flatpak -y install flathub io.dbeaver.DBeaverCommunity
   
 # TPM for QEMU + Windows 11
@@ -99,7 +99,7 @@ sudo pip3 install pip wheel debugpy pytest --upgrade --pre
 # Perl Upgrade
 sudo cpanm App::cpanoutdated
 
-sudo echo "pip --disable-pip-version-check list --outdated --pre --format=json | python -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade --pre --ignore-installed -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
+sudo echo "pip --disable-pip-version-check list --outdated --pre --format=json | python -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade --pre -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
 sudo echo -e "dnf -y update\nflatpak update -y\ncpan-outdated -p | cpanm\nfwupdmgr get-devices\nfwupdmgr refresh --force\nfwupdmgr get-updates\nfwupdmgr update" >> /usr/bin/auto-upgrade-ign.sh
 sudo chmod -x /usr/bin/auto-upgrade-ign.sh
 sudo sh /usr/bin/auto-upgrade-ign.sh
