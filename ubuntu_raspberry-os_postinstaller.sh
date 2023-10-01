@@ -20,21 +20,26 @@ if [ "$DIST" == "raspbian" ]; then
 fi
 
 # Add Webmin Repository
-sudo curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
+sudo wget https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
 sudo sh setup-repos.sh
-  
+
+# Add Google Chrome  
 wget https://dl.google.com/linux/direct/google-chrome-beta_current_"$ARCH".deb
 sudo dpkg --install google-chrome-beta_current_"$ARCH".deb
 rm google-chrome-beta_current_"$ARCH".deb
 
-sudo echo "deb http://download.webmin.com/download/repository sarge contrib" | sudo tee /etc/apt/sources.list.d/webmin.list
-get -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
+# Add Visual Studio Code
+wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-"$ARCH"
+sudo dpkg --install code_*.deb
+rm code_*.deb
 
 sudo apt update
 sudo apt -y upgrade
 sudo apt -y full-upgrade
-sudo apt -y install --install-recommends brasero
-sudo apt -y install winbind apt-transport-https webmin tasksel ubuntu-restricted-extras build-essential synaptic libdvd-pkg libreoffice printer-driver-cups-pdf filezilla rabbitvcs-nautilus ffmpeg git ruby-sass node-less gfortran cmake npm nodejs qt5-qmake curl network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-strongswan network-manager-vpnc-gnome python3-pip gstreamer1.0-nice gstreamer1.0-omx-generic gstreamer1.0-opencv gstreamer1.0-pipewire gstreamer1.0-pocketsphinx gstreamer1.0-rtsp gstreamer1.0-plugins-bad
+sudo apt -y remove file-roller
+sudo apt -y install --install-recommends file-roller
+sudo apt -y autoremove
+sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools
 
 sudo tasksel install lamp-server
 sudo mysql_secure_installation
