@@ -39,9 +39,9 @@ sudo apt -y full-upgrade
 sudo apt -y remove file-roller
 sudo apt -y install --install-recommends file-roller
 sudo apt -y autoremove
-sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools
+sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools php-json php-imagick php-ssh2 php-tidy policycoreutils python3-pip python3-debugpy virt-manager
 
-sudo tasksel install lamp-server
+sudo tasksel install web-server
 sudo mysql_secure_installation
 sudo dpkg-reconfigure libdvd-pkg
 
@@ -61,20 +61,15 @@ sudo ln -s /sys/firmware/acpi/tables/MSDM /usr/share/seabios/msdm.bin
 sudo restorecon -R -v /usr/share/seabios/
 sudo chmod -R 777 /usr/share/seabios/*
 
-sudo /usr/libexec/webmin/changepass.pl /etc/webmin root "$password"
+sudo /usr/share/webmin/changepass.pl /etc/webmin root "$password"
 
 # virtio-fs folder
 mkdir ~/SHARE
 
-# Web Stuff
-sudo npm install -g npm@latest cordova
-sudo pip3 install pip wheel debugpy pytest --upgrade --pre
-
 # Perl Upgrade
 sudo cpanm App::cpanoutdated
 
-sudo echo "pip --disable-pip-version-check list --outdated --pre --format=json | python -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade --pre --ignore-installed -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
-sudo echo -e "dnf -y update\nflatpak update -y\ncpan-outdated -p | cpanm\nfwupdmgr get-devices\nfwupdmgr refresh --force\nfwupdmgr get-updates\nfwupdmgr update" >> /usr/bin/auto-upgrade-ign.sh
+sudo echo -e "apt -y update\napt -y upgrade\nsnap refresh\ncpan-outdated -p | cpanm\nfwupdmgr get-devices\nfwupdmgr refresh --force\nfwupdmgr get-updates\nfwupdmgr update" >> /usr/bin/auto-upgrade-ign.sh
 sudo chmod -x /usr/bin/auto-upgrade-ign.sh
 sudo sh /usr/bin/auto-upgrade-ign.sh
 sudo echo -e '[Unit]\nDescription=Auto Upgrade (Ignacio)\nWants=network-online.target\nAfter=network.target network-online.target\n[Service]\nExecStart=sh "/usr/bin/auto-upgrade-ign.sh"\n\n[Install]\nWantedBy=multi-user.target' | sudo tee /etc/systemd/system/auto-upgrade-ign.service
