@@ -3,7 +3,7 @@
 
 source /etc/os-release
 BITS=$(getconf LONG_BIT)
-ARCH=$(uname -m)
+ARCH=$(dpkg --print-architecture)
 
 KERNEL=$(uname -r)
 COMPUTER_ID='airwave7'
@@ -29,17 +29,16 @@ sudo dpkg --install google-chrome-beta_current_"$ARCH".deb
 rm google-chrome-beta_current_"$ARCH".deb
 
 # Add Visual Studio Code
-wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-"$ARCH"
-sudo dpkg --install code_*.deb
-rm code_*.deb
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
 
-sudo apt update
+sudo apt -y autoremove
 sudo apt -y upgrade
-sudo apt -y full-upgrade
 sudo apt -y remove file-roller
 sudo apt -y install --install-recommends file-roller
-sudo apt -y autoremove
-sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools php-json php-imagick php-ssh2 php-tidy policycoreutils python3-pip python3-debugpy virt-manager
+sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools php-json php-imagick php-ssh2 php-tidy policycoreutils python3-pip python3-debugpy virt-manager code
 
 sudo tasksel install web-server
 sudo mysql_secure_installation
