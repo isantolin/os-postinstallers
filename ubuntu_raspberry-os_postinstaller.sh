@@ -54,8 +54,8 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 mkdir /tmp/myvtpm
 sudo swtpm_setup --tpm2 --tpmstate /tmp/myvtpm --create-ek-cert --create-platform-cert
 sudo chmod 777 -R /var/lib/swtpm-localca/
-sudo ln -s /sys/firmware/acpi/tables/SLIC /usr/share/seabios/slic.bin
-sudo ln -s /sys/firmware/acpi/tables/MSDM /usr/share/seabios/msdm.bin
+sudo cp /sys/firmware/acpi/tables/SLIC /usr/share/seabios/slic.bin
+sudo cp /sys/firmware/acpi/tables/MSDM /usr/share/seabios/msdm.bin
   
 sudo restorecon -R -v /usr/share/seabios/
 sudo chmod -R 777 /usr/share/seabios/*
