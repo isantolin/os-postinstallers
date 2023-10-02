@@ -76,12 +76,17 @@ sudo sh /usr/bin/auto-upgrade-ign.sh
 sudo echo -e '[Unit]\nDescription=Auto Upgrade (Ignacio)\nWants=network-online.target\nAfter=network.target network-online.target\n[Service]\nExecStart=sh "/usr/bin/auto-upgrade-ign.sh"\n\n[Install]\nWantedBy=multi-user.target' | sudo tee /etc/systemd/system/auto-upgrade-ign.service
 sudo systemctl enable auto-upgrade-ign.service
 
-#Autostart some applications
+# Autostart some applications
 mkdir ~/.config/autostart
 cp /usr/share/applications/google-chrome-beta.desktop ~/.config/autostart
 echo -e "X-GNOME-Autostart-enabled=true" | tee -a ~/.config/autostart/google-chrome-beta.desktop
 
-#Install GPG Keys
+# Remove unwanted Apps
+sudo snap remove firefox
+sudo apt remove firefox
+sudo apt remove thunderbird
+
+# Install GPG Keys
 gpg2 --import /run/media/ignaciosantolin/KEYS/private.pgp
 gpg2 --keyserver keys.openpgp.org --recv-keys ADD3C408CD66D157
 
