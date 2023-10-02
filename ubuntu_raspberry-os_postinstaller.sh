@@ -40,6 +40,7 @@ sudo apt -y upgrade
 sudo apt -y remove file-roller
 sudo apt -y install --install-recommends file-roller
 sudo apt -y install webmin tasksel printer-driver-cups-pdf ubuntu-restricted-extras build-essential synaptic network-manager-fortisslvpn-gnome network-manager-iodine-gnome network-manager-l2tp-gnome network-manager-openconnect-gnome network-manager-ssh-gnome network-manager-vpnc-gnome network-manager-sstp-gnome network-manager-strongswan gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-convolver-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-espeak gstreamer1.0-fdkaac gstreamer1.0-libcamera gstreamer1.0-nice gstreamer1.0-omx-* gstreamer1.0-opencv gstreamer1.0-plugins-bad gstreamer1.0-plugins-bad-apps gstreamer1.0-plugins-rtp gstreamer1.0-pocketsphinx gstreamer1.0-pulseaudio gstreamer1.0-qt5 gstreamer1.0-qt6 gstreamer1.0-rtsp apt-transport-https libdvd-pkg libreoffice ffmpeg git printer-driver-escpr cpanminus seabios swtpm-tools php-json php-imagick php-ssh2 php-tidy policycoreutils python3-pip python3-debugpy virt-manager code
+sudo apt -y install librsync-dev libvirt-dev libcairo2-dev libgirepository1.0-dev
 
 sudo tasksel install web-server
 sudo mysql_secure_installation
@@ -68,7 +69,7 @@ mkdir ~/SHARE
 
 # Perl Upgrade
 sudo cpanm App::cpanoutdated
-
+sudo echo "sudo pip3 --disable-pip-version-check list --outdated --pre --format=json | sudo python3 -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | sudo xargs -n1 pip install --upgrade --break-system-packages --pre -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
 sudo echo -e "apt -y update\napt -y upgrade\nsnap refresh\ncpan-outdated -p | cpanm\nfwupdmgr get-devices\nfwupdmgr refresh --force\nfwupdmgr get-updates\nfwupdmgr update" >> /usr/bin/auto-upgrade-ign.sh
 sudo chmod -x /usr/bin/auto-upgrade-ign.sh
 sudo sh /usr/bin/auto-upgrade-ign.sh
