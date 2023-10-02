@@ -35,6 +35,7 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packag
 rm -f packages.microsoft.gpg
 
 sudo apt -y autoremove
+sudo apt update
 sudo apt -y upgrade
 sudo apt -y remove file-roller
 sudo apt -y install --install-recommends file-roller
