@@ -112,9 +112,12 @@ mkdir ~/.config/autostart
 cp /usr/share/applications/google-chrome-beta.desktop ~/.config/autostart
 echo -e "X-GNOME-Autostart-enabled=true" | tee -a ~/.config/autostart/google-chrome-beta.desktop
 
-#Install GPG Keys - STILL USING Yubikey we need to import
-gpg2 --import /run/media/ignaciosantolin/KEYS/private.pgp
-gpg2 --keyserver keys.openpgp.org --recv-keys ADD3C408CD66D157
+# Install GPG Keys on Yubikeys (One for each SC) -
+sudo service pcscd restart
+gpg-card --verbose --FETCH # Not Working yet Use "gpg --card-edit" "fetch"
+# Install GPG Keys on Yubikeys (One for each SC) - END
+
+gpg --list-keys --fingerprint | grep pub -A 1 | grep -Ev "pub|--" | tr -d ' ' | awk 'BEGIN { FS = "\n" } ; { print $1":6:" } ' | gpg --import-ownertrust
 
 mkdir ~/.ssh/
 cp /run/media/ignaciosantolin/KEYS/id_rsa ~/.ssh/id_rsa
