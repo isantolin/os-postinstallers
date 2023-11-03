@@ -18,6 +18,7 @@ VERSION_ID=$(rpm -E %fedora)
 KERNEL=$(uname -r)
 COMPUTER_ID='airwave7'
 
+sudo dnf install dnf5
 #Disabled Touchpad on X11
 sudo echo -e 'Section "InputClass"\n\tIdentifier "ETPS/2 Elantech Touchpad"\n\tMatchProduct "ETPS/2 Elantech Touchpad"\n\tMatchIsTouchpad "on"\n\tMatchOS "Linux"\n\tMatchDevicePath "/dev/input/event*"\n\tOption "Ignore" "on"\nEndSection\n' | sudo tee /etc/X11/xorg.conf.d/synaptics.conf
 #Disabled Touchpad on Wayland
