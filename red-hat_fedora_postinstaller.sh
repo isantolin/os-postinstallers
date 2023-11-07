@@ -50,7 +50,7 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 # Update to install repository packages
 sudo find /etc/yum.repos.d/*.repo -type f -exec sed -i 's/enabled=0/enabled=1/g' {} \;
 sudo flatpak update
-sudo dnf clean all
+sudo dnf5 clean all
 sudo dnf5 -y update --refresh
 sudo dnf5 -y install python-devel cairo-devel gobject-introspection-devel cairo-gobject-devel libcurl-devel krb5-devel kernel-devel-"$KERNEL" libvirt-devel pcsc-lite-devel libdb-devel akmods swig
 
