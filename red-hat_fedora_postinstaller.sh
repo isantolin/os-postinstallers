@@ -144,6 +144,10 @@ sudo chmod 600 ~/.ssh/id_rs*
 ssh-add ~/.ssh/id_rsa
 
 # Setup Printer
+sed -i 's/use-ipv4=yes/use-ipv4=no/g' /etc/avahi/avahi-daemon.conf
+sed -i 's/use-ipv6=yes/use-ipv6=no/g' /etc/avahi/avahi-daemon.conf
+sudo systemctl disable cups-browsed
+sudo systemctl stop cups-browsed
 sudo lpadmin -p "L3250" -E -v dnssd://EPSON%20L3250%20Series._ipp._tcp.local/ -m everywhere
 sudo lpadmin -p "L3250" -o Media=A4 -o PageSize=A4
 sudo lpadmin -d "L3250"
