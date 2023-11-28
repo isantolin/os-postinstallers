@@ -118,7 +118,7 @@ sudo pip3 install pip wheel debugpy pytest --upgrade --pre
 sudo cpanm App::cpanoutdated
 
 sudo echo "sudo pip3 --disable-pip-version-check list --outdated --pre --format=json | sudo python3 -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | sudo xargs -n1 pip install --upgrade --break-system-packages --pre -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
-sudo echo "sudo pip3 --disable-pip-version-check list --outdated --pre --format=json | sudo python3 -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | sudo xargs -n1 pip install --upgrade --break-system-packages --pre --ignore-installed -U" | sudo tee /usr/bin/auto-upgrade-ign.sh
+sudo echo "sudo pip3 --disable-pip-version-check list --outdated --pre --format=json | sudo python3 -c \"import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))\" | grep -v '^-e' | cut -d = -f 1  | sudo xargs -n1 pip install --upgrade --break-system-packages --pre --ignore-installed -U" | sudo tee -a /usr/bin/auto-upgrade-ign.sh
 sudo echo -e "dnf5 -y update\nflatpak update -y\ncpan-outdated -p | cpanm\nfwupdmgr get-devices\nfwupdmgr refresh --force\nfwupdmgr get-updates\nfwupdmgr update" >> /usr/bin/auto-upgrade-ign.sh
 sudo chmod -x /usr/bin/auto-upgrade-ign.sh
 sudo sh /usr/bin/auto-upgrade-ign.sh
