@@ -27,4 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: ubuntu_raspberry-os_postinstaller.sh
+        run: sh ./ubuntu_raspberry-os_postinstaller.sh
