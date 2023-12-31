@@ -144,12 +144,6 @@ gpg-card --verbose --FETCH # Not Working yet Use "gpg --card-edit" "fetch"
 
 gpg --list-keys --fingerprint | grep pub -A 1 | grep -Ev "pub|--" | tr -d ' ' | awk 'BEGIN { FS = "\n" } ; { print $1":6:" } ' | gpg --import-ownertrust
 
-mkdir ~/.ssh/
-cp /run/media/ignaciosantolin/KEYS/id_rsa ~/.ssh/id_rsa
-cp /run/media/ignaciosantolin/KEYS/id_rsa.pub ~/.ssh/id_rsa.pub
-sudo chmod 600 ~/.ssh/id_rs*
-ssh-add ~/.ssh/id_rsa
-
 # Setup Printer
 sed -i 's/use-ipv4=yes/use-ipv4=no/g' /etc/avahi/avahi-daemon.conf
 sed -i 's/use-ipv6=yes/use-ipv6=no/g' /etc/avahi/avahi-daemon.conf
