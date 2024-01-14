@@ -31,6 +31,11 @@ sudo sh setup-repos.sh
 echo -e "fastestmirror=true\ndeltarpm=true\nmax_parallel_downloads=10" | sudo tee -a /etc/dnf/dnf.conf
 echo -e "127.0.0.1\tlocalhost $COMPUTER_ID\n::1\tlocalhost $COMPUTER_ID" | sudo tee /etc/hosts
 sudo hostnamectl set-hostname $COMPUTER_ID
+echo -e "127.0.0.1\tlocalhost $COMPUTER_ID\n::1\tlocalhost $COMPUTER_ID" | sudo tee /etc/hosts
+
+#Add AdGuard Home
+sudo cp /etc/systemd/resolved.conf /etc/systemd/resolved.conf.d/override1.conf
+echo -e "DNS=192.168.15.36 2804:431:c7c6:5949:6b2f:7bc6:e83d:b65b" | sudo tee /etc/systemd/resolved.conf.d/override1.conf
 
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.desktop.datetime automatic-timezone true
