@@ -71,8 +71,9 @@ sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 sudo dnf5 -y install webmin httpd gcc-c++ make nodejs cups-pdf cups-lpd cabextract lzip p7zip p7zip-plugins unrar alsa-plugins-pulseaudio libcurl gstreamer1-plugin-openh264 gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-free-fluidsynth gstreamer1-plugins-bad-free-wildmidi gstreamer1-plugins-base-tools gstreamer1-plugins-fc gstreamer1-plugins-good-extras gstreamer1-rtsp-server gstreamer1-vaapi NetworkManager-fortisslvpn-gnome NetworkManager-iodine-gnome NetworkManager-l2tp-gnome NetworkManager-libreswan-gnome NetworkManager-sstp-gnome NetworkManager-strongswan-gnome epson-inkjet-printer-escpr2 NetworkManager-ovs gstreamer1-libav gcc-gfortran cmake fedora-workstation-repositories perl-App-cpanminus seabios swtpm-tools code-insiders mkfontscale xset xorg-x11-drv-nvidia-390xx akmod-nvidia-390xx xorg-x11-drv-nvidia-390xx-cuda vulkan vdpauinfo libva-nvidia-driver gstreamer1-plugin-reqwest gstreamer1-plugin-reqwest gstreamer1-plugins-bad-free-zbar gstreamer1-svt-av1 gstreamer1-svt-vp9 httpd mariadb-server php php-common php-mysqlnd php-xml php-json php-gd php-mbstring php-pecl-imagick php-opcache php-pecl-ssh2 php-tidy nvidia-vaapi-driver ffmpeg yubikey-manager-qt yubico-piv-tool java-latest-openjdk https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm rpmfusion-nonfree-release-tainted nouveau-firmware
 
 sudo flatpak -y install flathub io.dbeaver.DBeaverCommunity
-wget -O yubioath-flutter-main.zip https://codeload.github.com/Yubico/yubioath-flutter/zip/refs/heads/main
-tar -xvf yubico-authenticator-latest-linux.tar.gz -C yubico-authenticator-latest-linux/
+wget -O yubioath-flutter-main.tar.gz https://developers.yubico.com/yubioath-flutter/Releases/yubico-authenticator-latest-linux.tar.gz
+mkdir yubico-authenticator-latest-linux
+tar -xvf yubioath-flutter-main.tar.gz -C yubico-authenticator-latest-linux/
 cd yubico-authenticator-latest-linux
 cd $(ls)
 sh ./desktop_integration.sh --install
