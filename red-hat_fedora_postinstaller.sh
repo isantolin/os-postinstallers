@@ -150,15 +150,6 @@ gpg-card --verbose --FETCH # Not Working yet Use "gpg --card-edit" "fetch"
 
 gpg --list-keys --fingerprint | grep pub -A 1 | grep -Ev "pub|--" | tr -d ' ' | awk 'BEGIN { FS = "\n" } ; { print $1":6:" } ' | gpg --import-ownertrust
 
-# Setup Printer
-sed -i 's/use-ipv4=yes/use-ipv4=no/g' /etc/avahi/avahi-daemon.conf
-sed -i 's/use-ipv6=yes/use-ipv6=no/g' /etc/avahi/avahi-daemon.conf
-sudo systemctl disable cups-browsed
-sudo systemctl stop cups-browsed
-sudo lpadmin -p "L3250" -E -v dnssd://EPSON%20L3250%20Series._ipp._tcp.local/ -m everywhere
-sudo lpadmin -p "L3250" -o Media=A4 -o PageSize=A4
-sudo lpadmin -d "L3250"
-
 # Setup VM
 wget https://raw.githubusercontent.com/isantolin/os-templates-and-setup/main/qemu-win11.xml
 sudo virsh create qemu-win11.xml
