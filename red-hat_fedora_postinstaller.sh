@@ -59,7 +59,7 @@ sudo dnf5 clean all
 sudo dnf5 -y update --refresh
 
 # Remove conflicting packages and not used packages
-sudo dnf5 -y remove libswscale-free ffmpeg-free libswresample-free libpostproc-free firefox
+sudo dnf5 -y remove libswscale-free ffmpeg-free libswresample-free libpostproc-free firefox libavutil-free
 
 # Signed drivers for Secure Boot
 sudo /usr/sbin/kmodgenca
